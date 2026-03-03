@@ -1,11 +1,14 @@
-import type { NativeScriptConfig } from '@nativescript/core'
+import type { NativeScriptConfig } from '@nativescript/core';
 
 export default {
-  id: 'org.nativescript.myAwesomeApp',
+  id: 'org.nativescript.dancingSean',
   appPath: 'src',
   appResourcesPath: 'App_Resources',
   android: {
     v8Flags: '--expose_gc',
     markingMode: 'none',
   },
-} as NativeScriptConfig
+  iOS: {
+    deploymentTarget: '13.0',
+  },
+} as NativeScriptConfig;

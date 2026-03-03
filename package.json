@@ -1,10 +1,12 @@
 {
   "name": "myAwesomeApp",
-  "main": "src/app.ts",
   "version": "1.0.0",
   "private": true,
+  "main": "src/app.ts",
   "dependencies": {
+    "@nativescript/animated-circle": "^1.3.0",
     "@nativescript/core": "~8.9.1",
+    "@nativescript/datetimepicker": "^3.0.2",
     "nativescript-vue": "3.0.2"
   },
   "devDependencies": {
@@ -16,7 +18,10 @@
     "@types/node": "~22.14.0",
     "eslint": "^9.39.2",
     "eslint-plugin-format": "^1.2.0",
+    "postcss": "^8.5.8",
+    "postcss-loader": "^8.2.1",
     "tailwindcss": "^4.1.3",
+    "ts-loader": "^9.5.4",
     "typescript": "^5.8.3"
   }
 }

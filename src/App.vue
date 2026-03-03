@@ -1,35 +1,17 @@
 <script lang="ts" setup>
-import { onMounted, onUnmounted } from 'nativescript-vue';
-
-import CurrentActives from '~/pages/Current.vue';
-import ActivesGroup from '~/pages/Groups.vue';
-import Profile from '~/pages/Profile.vue';
+import { onMounted } from 'nativescript-vue';
+import MainTabs from '~/pages/MainTabs.vue';
+import Summary from '~/pages/Summary.vue';
+import { currentView } from '~/utils/viewState';
 
 onMounted(() => {
-  console.log('mounted');
-});
-
-onUnmounted(() => {
-  console.log('unmounted');
+  console.log('App mounted');
 });
 </script>
 
 <template>
-  <TabView>
-    <TabViewItem title="当前">
-      <Frame>
-        <CurrentActives />
-      </Frame>
-    </TabViewItem>
-    <TabViewItem title="规划">
-      <Frame>
-        <ActivesGroup />
-      </Frame>
-    </TabViewItem>
-    <TabViewItem title="我的">
-      <Frame>
-        <Profile />
-      </Frame>
-    </TabViewItem>
-  </TabView>
+  <MainTabs v-if="currentView === 'tabs'" />
+  <Frame v-else-if="currentView === 'summary'">
+    <Summary />
+  </Frame>
 </template>
