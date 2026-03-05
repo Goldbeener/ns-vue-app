@@ -66,3 +66,7 @@ export function deletePlan(id: number): boolean {
   return false;
 }
 
+export function clearAllPlans(): void {
+  ApplicationSettings.remove(PLANS_KEY);
+}
+

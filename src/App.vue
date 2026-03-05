@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { onMounted } from 'nativescript-vue';
 import MainTabs from '~/pages/MainTabs.vue';
+import Setting from '~/pages/Setting.vue';
 import Summary from '~/pages/Summary.vue';
 import { currentView } from '~/utils/viewState';
 
@@ -13,5 +14,8 @@ onMounted(() => {
   <MainTabs v-if="currentView === 'tabs'" />
   <Frame v-else-if="currentView === 'summary'">
     <Summary />
+  </Frame>
+  <Frame v-else-if="currentView === 'setting'">
+    <Setting />
   </Frame>
 </template>

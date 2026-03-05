@@ -2,19 +2,26 @@
 import { Dialogs } from '@nativescript/core';
 import {
   computed,
+  inject,
   onMounted,
   onUnmounted,
   ref,
+  watch,
 } from 'nativescript-vue';
 import { getPlans } from '~/store';
-import { showSummary } from '~/utils/viewState';
+import { showSetting, showSummary } from '~/utils/viewState';
 
 const userName = ref('用户名');
 const userStatus = ref('在线');
 const userMotto = ref('每一天都是新的开始');
 const avatarText = ref('U');
 
-const plans = computed(() => getPlans());
+const plans = ref(getPlans());
+
+function loadData() {
+  plans.value = getPlans();
+}
+
 const totalPlans = computed(() => plans.value.length);
 const completedPlans = computed(() => {
   return plans.value.filter((plan) => {
@@ -30,6 +37,14 @@ const completedTasks = computed(() => {
     return sum + plan.tasks.filter(t => t.completed).length;
   }, 0);
 });
+
+// 监听 tab 切换信号，刷新数据
+const refreshCurrentPage = inject<any>('refreshCurrentPage');
+if (refreshCurrentPage) {
+  watch(refreshCurrentPage, () => {
+    loadData();
+  });
+}
 
 async function editUserName() {
   const result = await Dialogs.prompt({
@@ -73,7 +88,11 @@ async function changeStatus() {
 }
 
 function navigateToSummary() {
-  showSummary(2); // 2 是 Profile 页面的 tab 索引
+  showSummary(2);
+}
+
+function navigateToSetting() {
+  showSetting(2);
 }
 
 onMounted(() => {
@@ -142,7 +161,7 @@ onUnmounted(() => {
             </GridLayout>
           </StackLayout>
 
-          <StackLayout class="menu-item">
+          <StackLayout class="menu-item" @tap="navigateToSetting">
             <GridLayout columns="auto, *, auto">
               <Label col="0" text="ℹ️" class="menu-icon" />
               <Label col="1" text="关于" class="menu-text" />

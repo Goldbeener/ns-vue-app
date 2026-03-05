@@ -18,10 +18,8 @@ function onTabChange(index: number) {
   selectedIndex.value = index;
   lastTabIndex.value = index;
 
-  // 当切换到"当前"tab时，触发刷新
-  if (index === 0) {
-    refreshCurrentPage.value++;
-  }
+  // 每次切换 tab 都触发刷新信号
+  refreshCurrentPage.value++;
 }
 
 // 提供刷新信号给子组件
